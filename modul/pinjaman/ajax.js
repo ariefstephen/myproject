@@ -30,7 +30,6 @@ $(document).ready(function(){
 	          return false;
 		}	
 	});
-	$("#loading").hide();
 	$("#form_isian").hide();
 	$("#form_isian2").hide();
 	$("#tampil_data1").show();
@@ -59,16 +58,17 @@ $(document).ready(function(){
 		$("#tampil_data3").load('modul/pinjaman/tampil_data_cicilan.php?cari='+no);
 	})
 	$("#hitung").click(function(){
-		$('#loading').ajaxStart(function(){
-			$(this).fadeIn();
-		}).ajaxStop(function(){
-			$(this).fadeOut();
-		});
 		hitung();
 		$("#form_isian2").show();
 	});
 	$("#ajukan").click(function(){
-		simpanHeader();
+	var jawab = confirm("Ajukan pinjaman sekarang?");
+			if (jawab === true) {
+				simpanHeader();
+				window.location.reload();
+			} else {
+				return false;
+			}
 	})
 	
 	function hitung(){
@@ -222,7 +222,6 @@ $(document).ready(function(){
 		$(".input").val('');
 		$("#form_isian").hide();
 		$("#tampil_data3").hide();
-		$("#loading").hide();
 		$("#form_isian2").hide();
 		$("#tampil_data1").show();
 		$("#menu-tombol1").show();

@@ -1,14 +1,4 @@
 <script language="javascript" src="modul/pinjaman/ajax.js">
-$(function() {
-	$(".read a").click(function(e){
-				$("body").addClass("change");
-       
-				setInterval(function(){
-					$("body").removeClass("change");
-					},3000);
-           
-	});
-});
 </script>
 <style type="text/css">
 button {
@@ -55,33 +45,6 @@ button span.ui-icon {
 	float:right;
 	left:350px;
 }
-#loading { 
-	left: 0; 
-	color: white; 
-	background-color: #1484e6; 
-	padding: 5px 10px; 
-	font: 12px Arial; 
-	margin-top:20px; 
-}
-.change .loading-bar{
-	position:fixed;
-	top:50%;
-	left:20%;
-	width:60%;
-	height:2px;
-	background:#FFF;
-	box-shadow:inset 0 0 0 #000;
-	animation:alternate bar 5s infinite;
-}
-@keyframes bar{
-	0%{
-		box-shadow:inset 0px 0 0 #000;
-	}
-		
-	100%{
-		box-shadow:inset 900px 0 0 #000;
-	}
-}
 </style>
 <?php
 
@@ -126,7 +89,12 @@ echo "<div id='dalam_content'>
 			<tr>
 				<td width='15%'>Bunga</td>
 				<td width='2%'>:</td>
-				<td><input type='text' name='bunga' value='15' id='bunga' size='5' disabled > %</td>
+				<td>";
+				$table	= 'bunga';
+				$text	= "SELECT *	FROM $table";
+				$sql 	= mysqli_query($konek, $text);
+				$row	= mysqli_fetch_array($sql);
+			echo "<input type='text' name='bunga' value='$row[jumlah]%' id='bunga' size='5' disabled ></td>
 			</tr>
 			<tr>
 				<td width='15%'>Jumlah</td>
@@ -135,7 +103,6 @@ echo "<div id='dalam_content'>
 			</tr>
 			<tr>
 				<td colspan='3' align='center'>
-					<div class='read'><a href='#'>Read More</a></div>
 					<button class='ui-state-default ui-corner-all' id='hitung'>
 						<span class='ui-icon ui-icon-disk'></span>Hitung
 					</button>
@@ -159,7 +126,6 @@ echo "<div id='dalam_content'>
 			</button>
 		</div>
 	</div>
-	<!--<div id='loading'>Please wait..</div>-->
 	<div id='tampil_data1'>
 	</div>
 	<div id='tampil_data3'>
