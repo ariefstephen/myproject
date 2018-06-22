@@ -13,7 +13,7 @@ if ($row>0){
 	echo "<table>
 		<tr>
 			<td>Suku bunga saat ini</td>
-			<td>: $r[jumlah]</td>
+			<td>: $r[jumlah]%</td>
 		</tr>
 	</table>";
 }
