@@ -10,6 +10,7 @@ $(document).ready(function(){
 	//$("#info_anggota").load('modul/bunga/cari_bunga.php');
 	$("#simpan").click(function(){
 		simpan();
+		$("#jml").val("");
 	})
 	function simpan(){
 		var jml		= $("#jml").val();

@@ -32,8 +32,6 @@ button span.ui-icon {
 }
 </style>
 <?php
-include "inc/inc.koneksi.php";
-ini_set('display_errors', 1); ini_set('error_reporting', E_ERROR);
 $table	= 'bunga';
 $text	= "SELECT *	FROM $table";
 $sql 	= mysqli_query($konek, $text);
