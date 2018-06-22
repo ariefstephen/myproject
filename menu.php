@@ -8,6 +8,7 @@ if($_SESSION[isadmin] == 'Y'){
 <a href="#">Data</a>
 <ul>
 <li><a href="?module=jenis">Jenis Simpanan</a></li>
+<li><a href="?module=bunga">Suku Bunga</a></li>
 <li><a href="?module=anggota">Anggota</a></li>
 <li><a href="?module=users">Users</a></li>
 </ul>

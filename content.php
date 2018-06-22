@@ -1,5 +1,6 @@
 <?php
 include "inc/inc.koneksi.php";
+session_start();
 $mod = $_GET['module'];
 if ($mod=='home'){
 	echo "<h2>Selamat Datang</h2>";
@@ -17,7 +18,7 @@ elseif ($mod=='simpanan'){
 }
 //buatlah form pengambilan berdasarkan form simpanan
 elseif ($mod=='pinjaman'){
-	session_start();
+	
 	if($_SESSION[isadmin] == 'Y'){
 		include "modul/pinjaman/pinjaman.php";
 	} else
@@ -28,6 +29,11 @@ elseif ($mod=='bayar'){
 }
 elseif ($mod=='users'){
     include "modul/user/user.php";
+}
+elseif ($mod=='bunga'){
+	if($_SESSION[isadmin] == 'Y'){
+		include "modul/bunga/bunga.php";
+	}
 }
 else{
   echo "<b>MODUL BELUM ADA ATAU BELUM LENGKAP SILAHKAN BUAT SENDIRI</b>";

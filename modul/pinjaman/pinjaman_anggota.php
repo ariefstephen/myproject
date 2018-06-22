@@ -86,8 +86,7 @@ button span.ui-icon {
 <?php
 
 ini_set('display_errors', 1); ini_set('error_reporting', E_ERROR);
-echo " <body>
-<div id='dalam_content'>
+echo "<div id='dalam_content'>
 <h2>DAFTAR PINJAMAN ANGGOTA</h2>
 <div id='tabs'>
 <ul>
