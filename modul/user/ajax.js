@@ -38,7 +38,7 @@ $(document).ready(function(){
 			changeYear : true,
 			changeMonth:true,
     });
-	$("#tampil_data").load('modul/anggota/tampil_data.php');
+	$("#tampil_data").load('modul/user/tampil_data.php');
 	$('#tambah').click(function(){										
 		$(".input").val('');		
 		$("#nomor").attr("disabled",false);
@@ -48,43 +48,40 @@ $(document).ready(function(){
 	});
 	
 	function simpan(){
-		var no		= $("#nomor").val();
-		var id		= $("#identitas").val();
-		var nama	= $("#anggota").val();
-		var jk		= $("#jk").val();
-		var tempat	= $("#tempat").val();
-		var tgl		= $("#tgl").val();
-		var alamat	= $("#alamat").val();
-		var hp		= $("#hp").val();
+		var no		 = $("#nomor").val();
+		var username = $("#username").val();
+		var password = $("#password").val();
+		var isadmin	 = $("#isadmin").val();
 
 		if(no.length==0){
 			alert('Maaf, Nomor Anggota tidak boleh kosong');
 			$("#nomor").focus();
 			return false();
 		}
-		if(id.length==0){
-			alert('Maaf, Nomor Identitas tidak boleh kosong');
-			$("#identitas").focus();
+		if(username.length==0){
+			alert('Maaf, Username tidak boleh kosong');
+			$("#username").focus();
 			return false();
 		}
-		if(nama.length==0){
-			alert('Maaf, Nama Anggota tidak boleh kosong');
-			$("#anggota").focus();
+		if(password.length==0){
+			alert('Maaf, Password tidak boleh kosong');
+			$("#password").focus();
+			return false();
+		}
+		if(isadmin.length==0){
+			alert('Maaf, Level tidak boleh kosong');
+			$("#isadmin").focus();
 			return false();
 		}
 		$.ajax({
 			type	: "POST",
-			url		: "modul/anggota/simpan.php",
+			url		: "modul/user/simpan.php",
 			data	: "no="+no+
-					"&id="+id+
-					"&nama="+nama+
-					"&jk="+jk+
-					"&tempat="+tempat+
-					"&tgl="+tgl+
-					"&alamat="+alamat+
-					"&hp="+hp,
+					"&username="+username+
+					"&password="+password+
+					"&isadmin="+isadmin,
 			success	: function(data){
-				$("#tampil_data").load('modul/anggota/tampil_data.php');
+				$("#tampil_data").load('modul/user/tampil_data.php');
 				$("#form_input").dialog("close"); 
 			}
 		});
@@ -98,7 +95,7 @@ $(document).ready(function(){
 		var cari = e;
 		$.ajax({
 			type	: "GET",
-			url		: "modul/anggota/tampil_data.php",
+			url		: "modul/user/tampil_data.php",
 			data	: "cari="+cari,
 			success	: function(data){
 				$("#tampil_data").html(data);

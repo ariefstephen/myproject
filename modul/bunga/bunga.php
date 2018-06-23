@@ -38,7 +38,12 @@ $sql 	= mysqli_query($konek, $text);
 $row	= mysqli_num_rows($sql);
 if ($row>0){
 	$r=mysqli_fetch_array($sql);
-	echo "<div id='dalam_content'>
+	$jumlah = $r[jumlah];
+} else {
+	$jumlah = 0;
+}
+echo "
+<div id='dalam_content'>
 	<h2>SUKU BUNGA PINJAMAN</h2>
 	<div id='tabs'>
 		<ul>
@@ -50,7 +55,7 @@ if ($row>0){
 			<table>
 				<tr>
 					<td>Suku bunga saat ini</td>
-					<td>: $r[jumlah]%</td>
+					<td>: $jumlah%</td>
 				</tr>
 			</table>
 		</div>
@@ -72,5 +77,4 @@ if ($row>0){
 
 	</div>
 	</div>";
-}
 ?>

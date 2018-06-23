@@ -59,34 +59,45 @@ include '../../inc/inc.koneksi.php';
 ini_set('display_errors', 1); ini_set('error_reporting', E_ERROR);
 $cari	= $_GET['cari'];
 
-$where	= " WHERE noanggota LIKE '%$cari%' OR namaanggota LIKE '%$cari%'";
+$where	= " WHERE a.user_id LIKE '%$cari%' OR a.no_anggota LIKE '%$cari%' OR b.namaanggota LIKE '%$cari%' AND a.is_delete = 'N'";
 
 echo "<table id='theTable' width='100%'>
 		<tr>
 			<th width='5%'>No</th>
-			<th>Nomor</th>
-			<th>Nama</th>
-			<th>L/P</th>
-			<th>HP</th>
-			<th width='10%'>Aksi</th>
+			<th width='15%'>No.Anggota</th>
+			<th width='20%'>Nama</th>
+			<th width='15%'>Username</th>
+			<th width='10%'>Level</th>			
+			<th width='15%'>Aksi</th>
 		</tr>";
-	$sql	= "SELECT * 
-				FROM anggota
+	$sql	= "SELECT a.user_id, b.noanggota, b.namaanggota, a.is_admin, a.is_aktif
+				FROM users as a
+				JOIN anggota as b
+				ON a.no_anggota=b.noanggota 
 				$where
-				ORDER BY noanggota";
+				ORDER BY b.noanggota";
 	$query	= mysqli_query($konek, $sql);
 	
 	$no=1;
 	while($rows=mysqli_fetch_array($query)){
+				$level = 'Admin';
+				if ($rows[is_admin] == 'N'){
+					$level = 'User';
+				}
+				$isAktif = 'Aktifkan';
+				if ($rows[is_aktif] == 'Y'){
+					$isAktif = 'Non-Aktifkan';
+				}
 		echo "<tr>
 				<td align='center'>$no</td>
 				<td align='center'>$rows[noanggota]</td>
-				<td>$rows[namaanggota]</td>
-				<td align='center'>$rows[jk]</td>
-				<td >$rows[hp]</td>
+				<td align='center'>$rows[namaanggota]</td>
+				<td align='center'>$rows[user_id]</td>
+				<td align='center'>$level</td>
 				<td align='center'>
 				<a href='javascript:editRow(\"{$rows[noanggota]}\")'>Edit</a>
-				<a href='javascript:deleteRow(\"{$rows[noanggota]}\")'>Hapus</a>			
+				<a href='javascript:aktifRow(\"{$rows[noanggota]}\")'>$isAktif</a>
+				<a href='javascript:deleteRow(\"{$rows[noanggota]}\")'>Hapus</a>				
 				</td>
 			</tr>";
 	$no++;
